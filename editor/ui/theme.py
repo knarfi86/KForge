@@ -1,71 +1,71 @@
 """
-KForge UI Theme
-
-Alle Farben, Größen und Abstände werden zentral hier definiert.
-Keine Magic Numbers mehr im restlichen UI-Code.
+KForge Theme
 """
 
-# --------------------------------------------------
-# Farben
-# --------------------------------------------------
+# -------------------------------------------------
+# COLORS
+# -------------------------------------------------
 
-WINDOW_BG = (0.11, 0.12, 0.13, 1)
+WINDOW_BG = (0.14, 0.14, 0.15, 1)
 
-PANEL_BG = (0.14, 0.15, 0.16, 1)
-PANEL_BG_ALT = (0.16, 0.17, 0.18, 1)
+PANEL_BG = (0.17, 0.17, 0.18, 1)
 
-BUTTON_BG = (0.20, 0.21, 0.22, 1)
-BUTTON_HOVER = (0.27, 0.28, 0.30, 1)
-BUTTON_ACTIVE = (0.18, 0.45, 0.85, 1)
-BUTTON_DISABLED = (0.10, 0.10, 0.10, 1)
+BUTTON_BG = (0.24, 0.24, 0.25, 1)
 
-TEXT = (1, 1, 1, 1)
-TEXT_DIM = (0.75, 0.75, 0.75, 1)
+BUTTON_ACTIVE = (0.18, 0.55, 0.32, 1)
 
-SECTION = (0.60, 0.82, 1.00, 1)
+BUTTON_HOVER = (0.30, 0.30, 0.32, 1)
 
-STATUS_OK = (0.25, 0.80, 0.25, 1)
-STATUS_WARNING = (1.00, 0.70, 0.20, 1)
-STATUS_ERROR = (1.00, 0.25, 0.25, 1)
+TEXT = (0.92, 0.92, 0.92, 1)
 
-# --------------------------------------------------
-# Layout
-# --------------------------------------------------
+TEXT_DIM = (0.70, 0.70, 0.70, 1)
 
-SIDE_PANEL_WIDTH = 240
+SECTION = (0.35, 0.80, 0.55, 1)
 
-BOTTOM_BAR_HEIGHT = 52
+WARNING = (0.90, 0.45, 0.20, 1)
 
-CONTENT_PADDING = 12
+# -------------------------------------------------
+# PANEL SIZES
+# -------------------------------------------------
 
-BUTTON_HEIGHT = 32
+SIDE_PANEL_WIDTH = 260
+
+RIGHT_PANEL_WIDTH = 280
+
+BOTTOM_BAR_HEIGHT = 80
+
+TOP_BAR_HEIGHT = 42
+
+CONTENT_PADDING = 15
+
+# -------------------------------------------------
+# BUTTONS
+# -------------------------------------------------
+
+BUTTON_HEIGHT = 34
 
 BUTTON_SPACING = 8
 
-SECTION_SPACING = 14
+SECTION_SPACING = 18
 
-# --------------------------------------------------
-# Schrift
-# --------------------------------------------------
+BUTTON_TEXT_SCALE = 16
 
-BUTTON_TEXT_SCALE = 0.045
+SECTION_TEXT_SCALE = 18
 
-SECTION_TEXT_SCALE = 0.050
+STATUS_TEXT_SCALE = 14
 
-STATUS_TEXT_SCALE = 0.040
+TITLE_TEXT_SCALE = 18
 
-TITLE_TEXT_SCALE = 0.055
+# -------------------------------------------------
+# ICONS
+# -------------------------------------------------
 
-# --------------------------------------------------
-# Icons
-# --------------------------------------------------
+ICON_SIZE = 22
 
-ICON_SIZE = 20
+# -------------------------------------------------
+# TOOLTIP
+# -------------------------------------------------
 
-# --------------------------------------------------
-# Animation
-# --------------------------------------------------
+TOOLTIP_WIDTH = 260
 
-HOVER_SPEED = 0.15
-
-CLICK_SPEED = 0.08
+TOOLTIP_PADDING = 10
