@@ -1,4 +1,6 @@
-from .registry import UI_REGISTRY
+from direct.gui.DirectGui import DirectScrolledFrame
+
+from .registry import TOOLS
 from .widgets import KButton, SectionLabel
 from . import theme
 
@@ -10,101 +12,66 @@ class LeftPanel:
         self.parent = parent
         self.app = app
 
-        self.sections = []
         self.buttons = {}
 
-        self.margin = theme.CONTENT_PADDING
-        self.width = theme.SIDE_PANEL_WIDTH
+        self.frame = DirectScrolledFrame(
+            parent=parent,
+            canvasSize=(0, theme.SIDE_PANEL_WIDTH, -2000, 0),
+            frameSize=(0, theme.SIDE_PANEL_WIDTH, -800, 0),
+            manageScrollBars=False,
+            frameColor=(0.12, 0.12, 0.12, 1),
+        )
 
-    # ---------------------------------------------------------
+        self.build()
 
     def build(self):
 
-        y = -self.margin
+        current_category = None
+        y = -20
 
-        for category in UI_REGISTRY:
+        for tool in TOOLS:
 
-            label = SectionLabel(
-                parent=self.parent,
-                text=category.title,
+            if tool.category != current_category:
+
+                current_category = tool.category
+
+                label = SectionLabel(
+                    parent=self.frame.getCanvas(),
+                    text=current_category,
+                )
+
+                label.setPos(10, 0, y)
+
+                y -= 35
+
+            command = getattr(self.app, tool.command)
+
+            button = KButton(
+                parent=self.frame.getCanvas(),
+                text=tool.title,
+                command=command,
+                extra_args=list(tool.args),
             )
 
-            label.setPos(
-                self.margin,
-                0,
-                y,
-            )
+            button.kforge_mode = tool.mode
 
-            self.sections.append(label)
+            button.setPos(120, 0, y)
 
-            y -= theme.SECTION_SPACING
+            self.buttons[tool.id] = button
 
-            for tool in category.tools:
+            y -= theme.BUTTON_HEIGHT + theme.BUTTON_SPACING
 
-                if not hasattr(self.app, tool.command):
-                    print(
-                        f"[LeftPanel] Missing command: {tool.command}"
-                    )
-                    continue
-
-                command = getattr(
-                    self.app,
-                    tool.command
-                )
-
-                button = KButton(
-                    parent=self.parent,
-                    text=tool.title,
-                    command=command,
-                    extra_args=list(tool.args),
-                )
-
-                button.kforge_mode = tool.mode
-
-                button.setPos(
-                    self.width * 0.5,
-                    0,
-                    y,
-                )
-
-                self.buttons[tool.mode] = button
-
-                y -= (
-                    theme.BUTTON_HEIGHT
-                    + theme.BUTTON_SPACING
-                )
-
-            y -= theme.SECTION_SPACING
-
-    # ---------------------------------------------------------
+        self.frame["canvasSize"] = (
+            0,
+            theme.SIDE_PANEL_WIDTH,
+            y - 20,
+            0,
+        )
 
     def set_active(self, mode):
 
         for button in self.buttons.values():
-            button.set_active(False)
 
-        if mode in self.buttons:
-            self.buttons[mode].set_active(True)
+            active = getattr(button, "kforge_mode", None) == mode
 
-    # ---------------------------------------------------------
-
-    def show(self):
-
-        self.parent.show()
-
-    def hide(self):
-
-        self.parent.hide()
-
-    # ---------------------------------------------------------
-
-    def destroy(self):
-
-        for button in self.buttons.values():
-            button.destroy()
-
-        for section in self.sections:
-            section.destroy()
-
-        self.buttons.clear()
-        self.sections.clear()
+            button.set_active(active)

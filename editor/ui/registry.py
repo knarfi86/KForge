@@ -1,80 +1,81 @@
-from dataclasses import dataclass, field
+from .tool_definition import Tool
 
 
-@dataclass
-class Tool:
+TOOLS = [
 
-    title: str
-    command: str
-    mode: str = ""
-    args: tuple = ()
-    tooltip: str = ""
-
-
-@dataclass
-class Category:
-
-    title: str
-    icon: str = ""
-    collapsed: bool = False
-    tools: list = field(default_factory=list)
-
-
-UI_REGISTRY = [
-
-    Category(
-        title="Terrain",
-        tools=[
-            Tool("Raise", "set_mode", "raise", ("raise",), "Raise terrain"),
-            Tool("Lower", "set_mode", "lower", ("lower",), "Lower terrain"),
-            Tool("Smooth", "set_mode", "smooth", ("smooth",), "Smooth terrain"),
-            Tool("Flatten", "set_mode", "flatten", ("flatten",), "Flatten terrain"),
-        ],
+    Tool(
+        id="raise",
+        title="Raise",
+        category="Terrain",
+        command="set_mode",
+        mode="raise",
+        tooltip="Terrain anheben",
+        args=("raise",)
     ),
 
-    Category(
-        title="Textures",
-        tools=[
-            Tool("Grass", "set_texture_layer", "grass", (0,), "Grass texture"),
-            Tool("Rock", "set_texture_layer", "rock", (1,), "Rock texture"),
-            Tool("Sand", "set_texture_layer", "sand", (2,), "Sand texture"),
-            Tool("Snow", "set_texture_layer", "snow", (3,), "Snow texture"),
-        ],
+    Tool(
+        id="lower",
+        title="Lower",
+        category="Terrain",
+        command="set_mode",
+        mode="lower",
+        tooltip="Terrain absenken",
+        args=("lower",)
     ),
 
-    Category(
-        title="Objects",
-        collapsed=True,
-        tools=[],
+    Tool(
+        id="smooth",
+        title="Smooth",
+        category="Terrain",
+        command="set_mode",
+        mode="smooth",
+        tooltip="Terrain glätten",
+        args=("smooth",)
     ),
 
-    Category(
-        title="Roads",
-        collapsed=True,
-        tools=[],
+    Tool(
+        id="flatten",
+        title="Flatten",
+        category="Terrain",
+        command="set_mode",
+        mode="flatten",
+        tooltip="Fläche ebnen",
+        args=("flatten",)
     ),
 
-    Category(
-        title="Water",
-        collapsed=True,
-        tools=[],
+    Tool(
+        id="grass",
+        title="Grass",
+        category="Textures",
+        command="set_texture_layer",
+        tooltip="Gras",
+        args=(0,)
     ),
 
-    Category(
-        title="Vegetation",
-        collapsed=True,
-        tools=[],
+    Tool(
+        id="rock",
+        title="Rock",
+        category="Textures",
+        command="set_texture_layer",
+        tooltip="Fels",
+        args=(1,)
     ),
 
-    Category(
-        title="SpringRTS",
-        collapsed=True,
-        tools=[],
+    Tool(
+        id="sand",
+        title="Sand",
+        category="Textures",
+        command="set_texture_layer",
+        tooltip="Sand",
+        args=(2,)
     ),
 
-    Category(
-        title="AI",
-        collapsed=True,
-        tools=[],
+    Tool(
+        id="snow",
+        title="Snow",
+        category="Textures",
+        command="set_texture_layer",
+        tooltip="Schnee",
+        args=(3,)
     ),
 ]
